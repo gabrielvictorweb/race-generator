@@ -1,0 +1,19 @@
+version: '3.7'
+services:    
+    # Application & web server
+    app:
+        entrypoint: ./.docker/entrypoint.sh
+        build:
+          context: .        
+        ports:
+          - 8000:8000
+        networks:
+          vpcbr:
+            ipv4_address: 10.6.0.6
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.6.0.0/16
+          gateway: 10.6.0.1
