@@ -1,4 +1,4 @@
-# Racing Generator
+# Race Generator
 
 Aplicação para cadastrar, listar e cancelar corridas.
 
@@ -12,7 +12,7 @@ Aplicação para cadastrar, listar e cancelar corridas.
 Em seu terminal de comando, execute:
 
 ```
-$ cd pasta-de-downloads/racing-generator
+$ cd pasta-de-downloads/race-generator
 $ docker-compose build
 $ docker-compose up
 ```
@@ -22,7 +22,7 @@ $ docker-compose up
 Em seu terminal de comando, execute:
 
 ```
-$ cd pasta-de-downloads/racing-generator
+$ cd pasta-de-downloads/race-generator
 $ composer install
 $ php artisan migrate --force
 $ php artisan serve
@@ -34,11 +34,11 @@ URL: http://10.6.0.6:8000 (Docker) / http://localhost:8000 (Server Local)
 
 | Método   | URL | Body Request | Descrição                              |
 | -------- | --------------|-------------------------- | ---------------------------------------- |
-| `GET`    | `/api/racing` |                           | Listar todas as corridas.                |
-| `GET`    | `/api/racing/{id}` |                       | Listar uma corrida.                      |
-| `POST`   | `/api/racing` | { name: string, rules: string, date: 'd-m-Y H:i' }| Criar uma nova corrida.                  |
-| `GET`    | `/api/racing/cancelled` |                  | Listar corridas canceladas.              |
-| `DELETE` | `/api/racing/{id}`| | Deletar/Cancelar Corrida.|
+| `GET`    | `/api/race` |                           | Listar todas as corridas.                |
+| `GET`    | `/api/race/{id}` |                       | Listar uma corrida.                      |
+| `POST`   | `/api/race` | { name: string, rules: string, date: 'd-m-Y H:i' }| Criar uma nova corrida.                  |
+| `GET`    | `/api/race/cancelled` |                  | Listar corridas canceladas.              |
+| `DELETE` | `/api/race/{id}`| | Deletar/Cancelar Corrida.|
 
 ## Porque o uso do Laravel?
 
@@ -62,4 +62,4 @@ Foram realizados usando o teste de funcionalidade, presente no diretório tests/
 
 #### Services
 
-Um teste unitário foi criado para a *RacingService*, o objetivo dele é testar as funções que podem conter regras de negocio. Nesse cenário, foi realizado um Mock das funcões do *Repository*, já que sua unica funcão é retornar/executar funções relacionadas a *Model*.
+Um teste unitário foi criado para a *RaceService*, o objetivo dele é testar as funções que podem conter regras de negocio. Nesse cenário, foi realizado um Mock das funcões do *Repository*, já que sua unica funcão é retornar/executar funções relacionadas a *Model*.

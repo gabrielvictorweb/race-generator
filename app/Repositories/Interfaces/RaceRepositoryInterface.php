@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-interface RacingRepositoryInterface
+interface RaceRepositoryInterface
 {
     public function findAll();
     public function findAllDeleded();

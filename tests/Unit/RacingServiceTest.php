@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Repositories\RacingRepository;
-use App\Services\RacingService;
+use App\Repositories\RaceRepository;
+use App\Services\RaceService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class RacingServiceTest extends TestCase
+class RaceServiceTest extends TestCase
 {
     private $repository;
 
@@ -15,12 +15,12 @@ class RacingServiceTest extends TestCase
     {
         parent::setup();
 
-        $this->repository = \Mockery::mock(RacingRepository::class);
+        $this->repository = \Mockery::mock(RaceRepository::class);
     }
 
-    public function test_find_one_racing(): void
+    public function test_find_one_race(): void
     {
-        $racing = [
+        $race = [
             'id' => fake()->randomDigit(),
             'name' => fake()->name(),
             'rules' => fake()->text(),
@@ -29,16 +29,16 @@ class RacingServiceTest extends TestCase
 
         $this->repository
             ->shouldReceive('findById')
-            ->with($racing['id'])
-            ->andReturn($racing);
+            ->with($race['id'])
+            ->andReturn($race);
 
-        $service = new RacingService($this->repository);
-        $result = $service->findById($racing['id']);
+        $service = new RaceService($this->repository);
+        $result = $service->findById($race['id']);
 
-        $this->assertEquals($racing, $result);
+        $this->assertEquals($race, $result);
     }
 
-    public function test_find_all_racing(): void
+    public function test_find_all_race(): void
     {
         $return = [
             "data" => [
@@ -67,13 +67,13 @@ class RacingServiceTest extends TestCase
             ->shouldReceive('findAll')
             ->andReturn($return);
 
-        $service = new RacingService($this->repository);
+        $service = new RaceService($this->repository);
         $result = $service->findAll();
 
         $this->assertEquals($return, $result);
     }
 
-    public function test_find_all_racing_cancelled(): void
+    public function test_find_all_race_cancelled(): void
     {
         $return = [
             "data" => [
@@ -102,13 +102,13 @@ class RacingServiceTest extends TestCase
             ->shouldReceive('findAllDeleded')
             ->andReturn($return);
 
-        $service = new RacingService($this->repository);
+        $service = new RaceService($this->repository);
         $result = $service->findAllDeleded();
 
         $this->assertEquals($return, $result);
     }
 
-    public function test_notfound_racing(): void
+    public function test_notfound_race(): void
     {
         $id = fake()->randomDigit();
 
@@ -119,13 +119,13 @@ class RacingServiceTest extends TestCase
 
         $this->expectExceptionMessage('NotFound');
 
-        $service = new RacingService($this->repository);
+        $service = new RaceService($this->repository);
         $service->findById($id);
     }
 
-    public function test_racing_to_remove(): void
+    public function test_race_to_remove(): void
     {
-        $racing = [
+        $race = [
             'id' => fake()->randomDigit(),
             'name' => fake()->name(),
             'rules' => fake()->text(),
@@ -134,16 +134,16 @@ class RacingServiceTest extends TestCase
 
         $this->repository
             ->shouldReceive('delete')
-            ->with($racing['id'])
+            ->with($race['id'])
             ->andReturn(true);
 
-        $service = new RacingService($this->repository);
-        $result = $service->delete($racing['id']);
+        $service = new RaceService($this->repository);
+        $result = $service->delete($race['id']);
 
         $this->assertTrue($result);
     }
 
-    public function test_notfound_racing_to_remove(): void
+    public function test_notfound_race_to_remove(): void
     {
         $id = fake()->randomDigit();
 
@@ -154,7 +154,7 @@ class RacingServiceTest extends TestCase
 
         $this->expectExceptionMessage('NotFound');
 
-        $service = new RacingService($this->repository);
+        $service = new RaceService($this->repository);
         $service->delete($id);
     }
 }

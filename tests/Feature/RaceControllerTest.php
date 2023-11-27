@@ -2,17 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\Models\Racings;
+use App\Models\Race;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
-class RacingControllerTest extends TestCase
+class RaceControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testRequiredFieldsForSaveRacing(): void
+    public function testRequiredFieldsForSaverace(): void
     {
-        $this->json('POST', 'api/racing', ['Accept' => 'application/json'])
+        $this->json('POST', 'api/race', ['Accept' => 'application/json'])
             ->assertStatus(422)
             ->assertJson([
                 "success" => false,
@@ -25,15 +25,15 @@ class RacingControllerTest extends TestCase
             ]);
     }
 
-    public function testSuccessfulRacingSave()
+    public function testSuccessfulraceSave()
     {
-        $racingData = [
+        $raceData = [
             "name" => "Corrida",
             "rules" => "Regras",
             "date" => "01-12-2015 12:12",
         ];
 
-        $this->json('POST', 'api/racing', $racingData, ['Accept' => 'application/json'])
+        $this->json('POST', 'api/race', $raceData, ['Accept' => 'application/json'])
             ->assertStatus(201)
             ->assertJsonStructure([
                 "data" => [
@@ -48,11 +48,11 @@ class RacingControllerTest extends TestCase
             ]);
     }
 
-    public function testSuccessfulRacingList()
+    public function testSuccessfulraceList()
     {
-        Racings::factory()->create();
+        Race::factory()->create();
 
-        $this->json('GET', 'api/racing', ['Accept' => 'application/json'])
+        $this->json('GET', 'api/race', ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure([
                 "data" => [
@@ -69,31 +69,31 @@ class RacingControllerTest extends TestCase
             ]);
     }
 
-    public function testSuccessfulRacingFind()
+    public function testSuccessfulraceFind()
     {
-        $racing = Racings::factory()->create();
+        $race = Race::factory()->create();
 
-        $this->json('GET', "api/racing/$racing->id", ['Accept' => 'application/json'])
+        $this->json('GET', "api/race/$race->id", ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertExactJson([
                 "data" => [
-                    'id' => $racing->id,
-                    'name' => $racing->name,
-                    'rules' => $racing->rules,
-                    "date" => $racing->date,
-                    'created_at' => $racing->created_at,
-                    'updated_at' => $racing->updated_at,
-                    'deleted_at' => $racing->deleted_at,
+                    'id' => $race->id,
+                    'name' => $race->name,
+                    'rules' => $race->rules,
+                    "date" => $race->date,
+                    'created_at' => $race->created_at,
+                    'updated_at' => $race->updated_at,
+                    'deleted_at' => $race->deleted_at,
                 ]
             ]);
     }
 
-    public function testSuccessfulRacingListAllCancelled()
+    public function testSuccessfulraceListAllCancelled()
     {
-        $racing = Racings::factory()->create();
-        $racing->delete();
+        $race = Race::factory()->create();
+        $race->delete();
 
-        $this->json('GET', "api/racing/cancelled", ['Accept' => 'application/json'])
+        $this->json('GET', "api/race/cancelled", ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure([
                 "data" => [
@@ -110,30 +110,30 @@ class RacingControllerTest extends TestCase
             ]);
     }
 
-    public function testErrorRacingNotFound()
+    public function testErrorraceNotFound()
     {
-        $racing = Racings::factory()->create();
-        $id = $racing->id + 1;
+        $race = Race::factory()->create();
+        $id = $race->id + 1;
 
-        $this->json('GET', "api/racing/$id", ['Accept' => 'application/json'])
+        $this->json('GET', "api/race/$id", ['Accept' => 'application/json'])
             ->assertStatus(404);
     }
 
-    public function testSuccessfulRacingRemove()
+    public function testSuccessfulraceRemove()
     {
-        $racing = Racings::factory()->create();
+        $race = Race::factory()->create();
 
-        $this->json('DELETE', "api/racing/$racing->id", ['Accept' => 'application/json'])
+        $this->json('DELETE', "api/race/$race->id", ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertSee(1);
     }
 
-    public function testErrorRacingNotFoundToRemove()
+    public function testErrorraceNotFoundToRemove()
     {
-        $racing = Racings::factory()->create();
-        $idNotFound = $racing->id + 1;
+        $race = Race::factory()->create();
+        $idNotFound = $race->id + 1;
 
-        $this->json('DELETE', "api/racing/$idNotFound", ['Accept' => 'application/json'])
+        $this->json('DELETE', "api/race/$idNotFound", ['Accept' => 'application/json'])
             ->assertStatus(404);
     }
 }

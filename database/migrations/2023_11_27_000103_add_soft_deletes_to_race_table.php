@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('racings', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('rules');
-            $table->timestamp('date');
-            $table->timestamps();
+        Schema::table('races', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('racings');
+        Schema::table('races', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

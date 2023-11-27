@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 use App\Repositories\Interfaces\{
-    RacingRepositoryInterface
+    RaceRepositoryInterface
 };
 
 use App\Repositories\{
-    RacingRepository
+    RaceRepository
 };
 
 use Illuminate\Support\ServiceProvider;
@@ -22,8 +22,8 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            RacingRepositoryInterface::class,
-            RacingRepository::class,
+            RaceRepositoryInterface::class,
+            RaceRepository::class,
         );
     }
 
