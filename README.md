@@ -32,21 +32,21 @@ $ php artisan serve
 
 URL: http://10.6.0.6:8000 (Docker) / http://localhost:8000 (Server Local)
 
-| Method   | URL                                      | Description                              |
-| -------- | ---------------------------------------- | ---------------------------------------- |
-| `GET`    | `/api/racing`                             | Listar todas as corridas.                      |
-| `GET`    | `/api/racing/{id}`                             | Listar uma corrida.                      |
-| `POST`   | `/api/racing`                             | Criar uma nova corrida.                       |
-| `GET`    | `/api/racing/cancelled`                          | Listar corridas canceladas.                       |
-| `DELETE` | `/api/racing/{id}` | Deletar/Cancelar Corrida.                    |
+| Método   | URL | Parâmetros | Descrição                              |
+| -------- | --------------|-------------------------- | ---------------------------------------- |
+| `GET`    | `/api/racing` |                           | Listar todas as corridas.                |
+| `GET`    | `/api/racing/{id}` |                       | Listar uma corrida.                      |
+| `POST`   | `/api/racing` | { name: string, rules: string, date: 'd-m-Y H:i' }| Criar uma nova corrida.                  |
+| `GET`    | `/api/racing/cancelled` |                  | Listar corridas canceladas.              |
+| `DELETE` | `/api/racing/{id}`| | Deletar/Cancelar Corrida.|
 
 ## Porque o uso do Laravel?
 
-Laravel é conhecido por ser um framework que preza pelo código limpo, e que possui uma boa estrutura, possibilitando que os desenvolvedores se preocupem apenas em escrever seus códigos enquanto a estrutura do projeto já esta definida.
+Laravel é conhecido por ser um framework que preza pelo código limpo, e que possui uma boa estrutura, possibilitando que os desenvolvedores se preocupem apenas em escrever seus códigos enquanto a estrutura do projeto já está definida.
 
 ## Decisões técnicas e arquiteturais
 
-Esse projeto já possui uma estrutura bem definida por conta do uso do Laravel. Porém possui algumas adaptações para obter uma melhor organização ao se comunicar com o banco de dados e ao mesmo tempo separar as regras de negocio. Para isso foram criados os diretórios *Services* e *Repositories*. Sendo a *Service*, responsável por executar as regras de negocio e os *Repositories* por fazer o contato com o Banco de dados utilizando *Models*.
+Esse projeto já possui uma estrutura bem definida por conta do uso do Laravel. Porém, possui algumas adaptações para obter uma melhor organização ao se comunicar com o banco de dados e ao mesmo tempo separar as regras de negócio. Para isso foram criados os diretórios *Services* e *Repositories*. Sendo a *Service*, responsável por executar as regras de negocio e os *Repositories* por fazer o contato com o Banco de dados utilizando *Models*.
 
 ## Notas adicionais
 
