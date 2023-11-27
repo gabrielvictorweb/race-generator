@@ -32,7 +32,7 @@ $ php artisan serve
 
 URL: http://10.6.0.6:8000 (Docker) / http://localhost:8000 (Server Local)
 
-| Método   | URL | Parâmetros | Descrição                              |
+| Método   | URL | Body Request | Descrição                              |
 | -------- | --------------|-------------------------- | ---------------------------------------- |
 | `GET`    | `/api/racing` |                           | Listar todas as corridas.                |
 | `GET`    | `/api/racing/{id}` |                       | Listar uma corrida.                      |
